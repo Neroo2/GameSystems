@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://bc00f0p38ulh7"]
+
+[ext_resource type="Texture2D" uid="uid://cyu75xraka3c0" path="res://textures/kenney_particle-pack (1)/PNG (Transparent)/Rotated/muzzle_01_rotated.png" id="1_00jo1"]
+
+[sub_resource type="Curve" id="Curve_3txrp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_v247h"]
+curve = SubResource("Curve_3txrp")
+
+[sub_resource type="Curve" id="Curve_72h41"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3d17f"]
+curve = SubResource("Curve_72h41")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lgi2f"]
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_3d17f")
+alpha_curve = SubResource("CurveTexture_v247h")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmnku"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+diffuse_mode = 3
+disable_ambient_light = true
+disable_fog = true
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.907393, 0.581173, 0, 1)
+albedo_texture = ExtResource("1_00jo1")
+
+[sub_resource type="QuadMesh" id="QuadMesh_7fx5w"]
+material = SubResource("StandardMaterial3D_fmnku")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yeoi3"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+albedo_color = Color(0.854663, 0.352294, 0.321411, 1)
+albedo_texture = ExtResource("1_00jo1")
+emission_enabled = true
+emission_energy_multiplier = 2.3
+
+[sub_resource type="QuadMesh" id="QuadMesh_e8xr0"]
+material = SubResource("StandardMaterial3D_yeoi3")
+orientation = 1
+
+[node name="MuzzleFlash" type="GPUParticles3D"]
+lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_lgi2f")
+draw_passes = 2
+draw_pass_1 = SubResource("QuadMesh_7fx5w")
+draw_pass_2 = SubResource("QuadMesh_e8xr0")

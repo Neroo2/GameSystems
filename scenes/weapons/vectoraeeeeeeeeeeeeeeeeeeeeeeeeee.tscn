@@ -1,0 +1,260 @@
+[gd_scene load_steps=27 format=3 uid="uid://b7splcd6od8yc"]
+
+[ext_resource type="PackedScene" uid="uid://c4rtx76nxvoor" path="res://assets/models/weapons/vectoraeeeeeeeeeeeeeeeeeeeeeeeeee.blend" id="1_5734v"]
+[ext_resource type="Script" uid="uid://bloxieidhw6of" path="res://scripts/weapons/vectoraeeeeeeeeeeeeeeeeeeeeeeeeee.gd" id="2_asdcb"]
+[ext_resource type="Texture2D" uid="uid://ce80xw1soscag" path="res://textures/test/Plaster_01-256x256.png" id="3_o1swa"]
+[ext_resource type="Texture2D" uid="uid://dql7bgep71tmt" path="res://textures/test/Metal_17-256x256.png" id="3_rw3ma"]
+[ext_resource type="Texture2D" uid="uid://cyu75xraka3c0" path="res://textures/kenney_particle-pack (1)/PNG (Transparent)/Rotated/muzzle_01_rotated.png" id="5_uqsxe"]
+[ext_resource type="Script" uid="uid://bgtopidm48wh7" path="res://scripts/general/sound_manager.gd" id="6_s6gdx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_asdcb"]
+cull_mode = 2
+albedo_color = Color(0.485703, 0.485704, 0.485703, 1)
+albedo_texture = ExtResource("3_rw3ma")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o1swa"]
+albedo_color = Color(0.412152, 0.412152, 0.412152, 1)
+albedo_texture = ExtResource("3_rw3ma")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noges"]
+albedo_color = Color(0.493545, 0.493546, 0.493546, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uqsxe"]
+albedo_color = Color(0.362829, 0.362829, 0.362829, 1)
+albedo_texture = ExtResource("3_rw3ma")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rw3ma"]
+albedo_color = Color(0.994599, 0.963965, 0.933752, 1)
+albedo_texture = ExtResource("3_o1swa")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s6gdx"]
+albedo_color = Color(0.458405, 0.458405, 0.458405, 1)
+albedo_texture = ExtResource("3_rw3ma")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wa1ib"]
+albedo_texture = ExtResource("3_rw3ma")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s5qx5"]
+albedo_texture = ExtResource("3_rw3ma")
+
+[sub_resource type="Animation" id="Animation_o1swa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.379828, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MuzzleFlash:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_asdcb"]
+resource_name = "vector_shoot"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.379828, 0, 0), Vector3(0.1, 0, 0), Vector3(-0.379828, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.135056, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.159942, 0, -0.0230733), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MuzzleFlash:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.03747),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../SoundManager")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["vector_shoot"],
+"method": &"play_audio"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rw3ma"]
+_data = {
+&"RESET": SubResource("Animation_o1swa"),
+&"vector_shoot": SubResource("Animation_asdcb")
+}
+
+[sub_resource type="Curve" id="Curve_3txrp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_v247h"]
+curve = SubResource("Curve_3txrp")
+
+[sub_resource type="Curve" id="Curve_72h41"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3d17f"]
+curve = SubResource("Curve_72h41")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lgi2f"]
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_3d17f")
+alpha_curve = SubResource("CurveTexture_v247h")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmnku"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+diffuse_mode = 3
+disable_ambient_light = true
+disable_fog = true
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.907393, 0.581173, 0, 1)
+albedo_texture = ExtResource("5_uqsxe")
+
+[sub_resource type="QuadMesh" id="QuadMesh_7fx5w"]
+material = SubResource("StandardMaterial3D_fmnku")
+size = Vector2(4, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yeoi3"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+albedo_color = Color(0.854663, 0.352294, 0.321411, 1)
+albedo_texture = ExtResource("5_uqsxe")
+emission_enabled = true
+emission_energy_multiplier = 2.3
+
+[sub_resource type="QuadMesh" id="QuadMesh_e8xr0"]
+material = SubResource("StandardMaterial3D_yeoi3")
+size = Vector2(4, 4)
+orientation = 1
+
+[node name="vectoraeeeeeeeeeeeeeeeeeeeeeeeeee" node_paths=PackedStringArray("weaponRaycast", "animationPlayer") instance=ExtResource("1_5734v")]
+transform = Transform3D(0.00429334, 0, -0.299969, 0, 0.3, 0, 0.299969, 0, 0.00429334, 0, 0, 0)
+script = ExtResource("2_asdcb")
+weaponName = "Vector"
+weaponDamage = 10
+weaponRaycast = NodePath("RayCast3D")
+animationPlayer = NodePath("Main/AnimationPlayer")
+shootAnimation = "vector_shoot"
+
+[node name="Main" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.379828, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_asdcb")
+
+[node name="Cable" parent="Main" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_o1swa")
+
+[node name="Detail" parent="Main" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_noges")
+
+[node name="Detail_001" parent="Main" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_noges")
+
+[node name="Detail_002" parent="Main" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_noges")
+
+[node name="Detail_003" parent="Main" index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_noges")
+
+[node name="Gunstock" parent="Main" index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_uqsxe")
+
+[node name="LowerPart" parent="Main" index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rw3ma")
+
+[node name="Muzzle" parent="Main" index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_s6gdx")
+
+[node name="Sight" parent="Main" index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wa1ib")
+
+[node name="Sight_001" parent="Main" index="10"]
+surface_material_override/0 = SubResource("StandardMaterial3D_s5qx5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Main" index="11"]
+libraries = {
+&"": SubResource("AnimationLibrary_rw3ma")
+}
+
+[node name="MuzzleFlash" type="GPUParticles3D" parent="Main" index="12"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.34919, 0.266829, 2.01531e-07)
+emitting = false
+lifetime = 0.1
+interp_to_end = 0.5
+one_shot = true
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_lgi2f")
+draw_passes = 2
+draw_pass_1 = SubResource("QuadMesh_7fx5w")
+draw_pass_2 = SubResource("QuadMesh_e8xr0")
+
+[node name="Light" parent="." index="1"]
+omni_range = 0.0
+
+[node name="RayCast3D" type="RayCast3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.27091, 0.233807, 7.45058e-09)
+target_position = Vector3(-60, 0, 0)
+collision_mask = 2
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="SoundManager" type="Node" parent="." index="3"]
+script = ExtResource("6_s6gdx")
+metadata/_custom_type_script = "uid://bgtopidm48wh7"

@@ -1,0 +1,105 @@
+[gd_scene load_steps=11 format=3 uid="uid://dah030pwppfad"]
+
+[ext_resource type="Shader" uid="uid://biym8e30vdw1c" path="res://shaders/ps1.gdshader" id="1_o3n0h"]
+[ext_resource type="Texture2D" uid="uid://cb81ylt7h1573" path="res://textures/test/Test_1m x 1m.png" id="1_ybdod"]
+[ext_resource type="PackedScene" uid="uid://dy35svutguhlm" path="res://scenes/player/player.tscn" id="2_2s55i"]
+[ext_resource type="PackedScene" uid="uid://c40rwl2ubayb3" path="res://scenes/entities/enemies/enemy.tscn" id="3_38prr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_38prr"]
+shader = ExtResource("1_o3n0h")
+shader_parameter/enabled = true
+shader_parameter/dithering = true
+shader_parameter/colors = 12
+shader_parameter/dither_size = 1
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_o3n0h"]
+vertices = PackedVector3Array(-99.5, 1, -99.5, -99.5, 1, 99.5, 99.5, 1, 99.5, 99.5, 1, -99.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fn2sa"]
+albedo_texture = ExtResource("1_ybdod")
+uv1_triplanar = true
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2s55i"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_o3n0h"]
+sky_material = SubResource("ProceduralSkyMaterial_2s55i")
+
+[sub_resource type="Environment" id="Environment_38prr"]
+background_mode = 2
+sky = SubResource("Sky_o3n0h")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="TestMap" type="Node3D"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_38prr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="SubViewportContainer/SubViewport"]
+navigation_mesh = SubResource("NavigationMesh_o3n0h")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D"]
+use_collision = true
+size = Vector3(200, 1, 200)
+material = SubResource("StandardMaterial3D_fn2sa")
+
+[node name="enemy" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47646, 0)
+collision_mask = 3
+
+[node name="enemy2" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4229, 1.47646, 1.97655)
+collision_mask = 3
+
+[node name="enemy3" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4229, 1.47646, 11.1012)
+collision_mask = 3
+
+[node name="enemy4" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4229, 1.47646, -23.8988)
+collision_mask = 3
+
+[node name="enemy5" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.4229, 1.47646, 8.10121)
+collision_mask = 3
+
+[node name="enemy6" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.4229, 1.47646, -17.8988)
+collision_mask = 3
+
+[node name="enemy7" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.4229, 1.47646, -17.8988)
+collision_mask = 3
+
+[node name="enemy8" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.4229, 1.47646, 29.1012)
+collision_mask = 3
+
+[node name="enemy9" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5771, 1.47646, 29.1012)
+collision_mask = 3
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
+environment = SubResource("Environment_38prr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_2s55i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9087, 0.504855, 21.8806)
+runningSpeed = 5
