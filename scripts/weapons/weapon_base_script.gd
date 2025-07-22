@@ -4,8 +4,14 @@ class_name BaseWeaponScript
 @export_category("Weapon Info")
 @export var weaponName: String
 @export var weaponMaxCharge: int
+@export var weaponChargeRate: int
 @export var weaponDamage: int
+@export var chargeWaitTime: float
 @export var weaponRaycast: RayCast3D
+@export var chargeTimer: Timer 
+var canShoot: bool  = true
+var currentCharge = 0
+
 
 
 @export_category("Weapon Animation")
@@ -21,26 +27,34 @@ var vfx:Dictionary = {
 		
 }
 
+func _ready():
+	chargeTimer.wait_time = chargeWaitTime
+	chargeTimer.one_shot = true
 
 
 func _physics_process(delta: float) -> void:
-	if weaponRaycast.is_colliding() and !animationPlayer.is_playing():
+	_verify_charge_rate()
+	print(currentCharge)
+	if weaponRaycast.is_colliding() and canShoot :
 		shoot()
+		
 
 
 func shoot():
 	if weaponRaycast.is_colliding():
 		var collider = weaponRaycast.get_collider()
-		if collider.is_in_group("Enemy"):
-			if !animationPlayer.is_playing():
-				animationPlayer.play(shootAnimation)
-				if collider.has_method("damage"):
-					collider.damage(weaponDamage)
-					create_vfx("enemy_damage")
-					create_vfx("enemy_impact")
+		if !collider == null:
+			if collider.is_in_group("Enemy"):
+				if !animationPlayer.is_playing():
+					animationPlayer.play(shootAnimation)
+					if collider.has_method("damage"):
+						collider.damage(weaponDamage)
+						currentCharge += weaponChargeRate
+						_create_vfx("enemy_damage")
+						_create_vfx("enemy_impact")
 					
 					
-func create_vfx(vfx_name):
+func _create_vfx(vfx_name):
 	if !vfx.has(vfx_name):
 		return
 		
@@ -68,3 +82,15 @@ func create_vfx(vfx_name):
 	await timer.timeout
 	vfx_instance.queue_free()
 	timer.queue_free()
+
+
+func _verify_charge_rate():
+	if currentCharge >= weaponMaxCharge and not chargeTimer.is_stopped():
+		return
+
+	if currentCharge >= weaponMaxCharge:
+		canShoot = false
+		chargeTimer.start()
+		await chargeTimer.timeout
+		currentCharge = 0
+		canShoot = true

@@ -14,7 +14,6 @@ const JUMP_VELOCITY = 4.5
 var current_speed: int = 2
 
 
-
 #Character Nodes
 @onready var player_model: Node3D = $playerModel
 @onready var armature: Node3D = $playerModel/Armature
@@ -104,12 +103,12 @@ func verify_state():
 		state_machine.send_event("toRun")
 	elif velocity.length() > 0 and is_on_floor() and !Input.is_action_pressed("run"):
 		state_machine.send_event("toWalk")
-	elif velocity.length() == 0 and is_on_floor():
-		state_machine.send_event("toIdle")
 	elif Input.is_action_just_pressed("jump"):
 		state_machine.send_event("toJump")
 	elif velocity.y < 0:
 		state_machine.send_event("toFalling")
+	else:
+		state_machine.send_event("toIdle")
 
 func camera_movement(event):
 	if event is InputEventMouseMotion:

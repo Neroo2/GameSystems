@@ -7,5 +7,6 @@ PTH={
 "res://scenes/": Color(1, 0.304688, 0, 1),
 "res://scripts/": Color(0, 1, 0.789063, 1),
 "res://shaders/": Color(0, 1, 0.0625, 1),
+"res://sounds/": Color(0.498039, 0.67451, 1, 1),
 "res://textures/": Color(1, 0.665851, 0.511628, 1)
 }
