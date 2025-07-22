@@ -1,6 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://c1a03ilywv76w"]
+[gd_scene load_steps=10 format=3 uid="uid://c1a03ilywv76w"]
 
 [ext_resource type="Script" uid="uid://dkm48n1bfd85g" path="res://addons/vfez/vfez_material_3d.gd" id="1_pjm7h"]
+
+[sub_resource type="Curve" id="Curve_te5nw"]
+_data = [Vector2(0.010929, 0.123596), 0.0, 0.0, 0, 0, Vector2(0.513661, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_pjm7h"]
+curve = SubResource("Curve_te5nw")
 
 [sub_resource type="Curve" id="Curve_8ce0k"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.561798), 0.0, 0.0, 0, 0]
@@ -11,13 +18,14 @@ curve = SubResource("Curve_8ce0k")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u7j86"]
 particle_flag_align_y = true
+emission_shape_scale = Vector3(0.1, 0.1, 0.1)
 spread = 180.0
-initial_velocity_min = 10.01
-initial_velocity_max = 10.01
-gravity = Vector3(0, -2, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 8.0
 scale_min = 0.2
 scale_max = 0.5
 scale_curve = SubResource("CurveTexture_c02w6")
+alpha_curve = SubResource("CurveTexture_pjm7h")
 
 [sub_resource type="Shader" id="Shader_te5nw"]
 resource_name = "VFEZ3DPreview"
@@ -30,13 +38,12 @@ code = "
 // the latest changes. Only the definitions (#define) actually change.
 // **********************************
 shader_type spatial;
-#define BLEND_ADD
+#define BLEND_MIX
 #define DEPTH_DRAW_OPAQUE
 #define CULL_BACK
-#define DIFFUSE_TOON
+#define DIFFUSE_LAMBERT
 #define SPECULAR_SCHLICK_GGX
 #define UNSHADED
-#define BILLBOARD_KEEP_SCALE
 #define COLOR_GLOW
 #include \"res://addons/vfez/Shaders/vfez_3d_template.gdshaderinc\"
 "
@@ -51,7 +58,7 @@ shader_parameter/premultiply_color = false
 shader_parameter/premultiply_alpha = false
 shader_parameter/shape1_main_texture_scale = Vector2(1, 1)
 shader_parameter/shape1_main_texture_offset = Vector2(0, 0)
-shader_parameter/shape1_color = Color(0.995579, 0.499964, 1, 1)
+shader_parameter/shape1_color = Color(0.612522, 0.533573, 1, 1)
 shader_parameter/shape1_red_as_alpha = false
 shader_parameter/shape1_scroll_speed = Vector2(0, 0)
 shader_parameter/shape1_rotation_offset = 0.0
@@ -82,8 +89,8 @@ shader_parameter/use_color_ramp = false
 shader_parameter/use_color_posterize = false
 shader_parameter/use_color_rim = false
 shader_parameter/use_color_glow = true
-shader_parameter/glow_color = Color(0.47451, 0.721569, 1, 1)
-shader_parameter/glow_intensity = 3.38
+shader_parameter/glow_color = Color(1, 0.537255, 0.607843, 1)
+shader_parameter/glow_intensity = 2.34
 shader_parameter/glow_intensity_global = 1.0
 shader_parameter/use_glow_texture = false
 shader_parameter/use_color_hsv_shift = false
@@ -96,25 +103,31 @@ shader_parameter/use_vertex_expand = false
 shader_parameter/use_particle_trails = false
 shader_parameter/use_particle_anim = false
 script = ExtResource("1_pjm7h")
-BlendMode = 1
+BlendMode = 0
 DepthDrawMode = 0
 CullMode = 0
-DiffuseMode = 3
+DiffuseMode = 0
 SpecularMode = 0
 ShadingMode = 0
 BillboardMode = 0
-BillboardKeepScale = true
+BillboardKeepScale = false
 NoDepthTest = false
 metadata/_custom_type_script = "uid://dkm48n1bfd85g"
 
-[sub_resource type="BoxMesh" id="BoxMesh_vsfyu"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_vsfyu"]
 material = SubResource("ShaderMaterial_pjm7h")
-size = Vector3(0.05, 2, 0.05)
+top_radius = 0.1
+bottom_radius = 0.0
+rings = 0
 
 [node name="enemyDamageVFX" type="GPUParticles3D"]
+emitting = false
 amount = 20
-lifetime = 0.2
+lifetime = 0.3
+interp_to_end = 0.05
+one_shot = true
 explosiveness = 1.0
+fixed_fps = 60
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_u7j86")
-draw_pass_1 = SubResource("BoxMesh_vsfyu")
+draw_pass_1 = SubResource("CylinderMesh_vsfyu")

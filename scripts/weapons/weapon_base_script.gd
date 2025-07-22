@@ -9,10 +9,11 @@ class_name BaseWeaponScript
 @export var weaponMinDamage: int
 @export var chargeWaitTime: float
 @export var weaponRaycast: RayCast3D
+@export var detectionArea: Area3D
 @export var chargeTimer: Timer 
 var canShoot: bool  = true
 var currentCharge = 0
-
+var wallCheck: Area3D
 
 
 @export_category("Weapon Animation")
@@ -27,14 +28,13 @@ var vfx:Dictionary = {
 }
 
 func _ready():
+	wallCheck = get_tree().current_scene.find_child("WallCheck")
 	chargeTimer.wait_time = chargeWaitTime
 	chargeTimer.one_shot = true
 
-
 func _physics_process(delta: float) -> void:
-	_verify_charge_rate()
-	print(currentCharge)
-	if weaponRaycast.is_colliding() and canShoot :
+	_verify_shoot_conditions()
+	if canShoot:
 		shoot()
 		
 
@@ -50,7 +50,7 @@ func shoot():
 						collider.damage(randi_range(weaponMinDamage, weaponMaxDamage))
 						currentCharge += weaponChargeRate
 						_create_vfx("enemy_damage")
-					
+
 					
 func _create_vfx(vfx_name):
 	if !vfx.has(vfx_name):
@@ -82,9 +82,15 @@ func _create_vfx(vfx_name):
 	timer.queue_free()
 
 
-func _verify_charge_rate():
+func _verify_shoot_conditions():
+	var collider = weaponRaycast.get_collider()
+	
 	if currentCharge >= weaponMaxCharge and not chargeTimer.is_stopped():
 		return
+	
+	if wallCheck == null:
+		return
+
 
 	if currentCharge >= weaponMaxCharge:
 		canShoot = false
@@ -92,3 +98,10 @@ func _verify_charge_rate():
 		await chargeTimer.timeout
 		currentCharge = 0
 		canShoot = true
+	
+	elif currentCharge < weaponMaxCharge:
+		if wallCheck.get_overlapping_bodies() != []:
+			canShoot = false
+		else:
+			canShoot = true
+		

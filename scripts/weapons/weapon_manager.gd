@@ -8,11 +8,15 @@ var target_enemy = null
 func _ready() -> void:
 	pass
 
+
+
 func _physics_process(delta: float) -> void:
 	detect_enemy()
 	if target_enemy != null:
 		for point in weaponPoints.get_children():
 			point.look_at(target_enemy.global_position)
+			
+			
 
 
 func detect_enemy():

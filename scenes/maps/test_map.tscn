@@ -13,8 +13,8 @@ shader_parameter/colors = 12
 shader_parameter/dither_size = 1
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_o3n0h"]
-vertices = PackedVector3Array(-99.5, 1, -99.5, -99.5, 1, 99.5, 99.5, 1, 99.5, 99.5, 1, -99.5)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+vertices = PackedVector3Array(-99.5, 1, -8.5, -27.75, 1, -8.25, -27.5, 1, -10, -25.5, 1, -99.5, -99.5, 1, -99.5, -25.5, 1, -10, -6.25, 1, -10, -6.25, 1, -99.5, -4.25, 1, -10, -4, 1, -7.75, 99.5, 1, -7.75, 99.5, 1, -99.5, -26.75, 15, -9, -26.75, 15, 11, -5, 15, 11, -5, 15, -9, -26.5, 1, -8.75, -26.5, 1, 11, -5.25, 1, 11, -5.25, 1, -8.75, -99.5, 1, 10.75, -27.75, 1, 10.5, -4, 1, 10, 99.5, 1, 10, -4, 1, 12, -5.75, 1, 12.25, -5.5, 1, 99.5, 99.5, 1, 99.5, -27.75, 1, 12, -26, 1, 12.25, -99.5, 1, 99.5, -26.25, 1, 99.5)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 4), PackedInt32Array(2, 4, 3), PackedInt32Array(3, 5, 2), PackedInt32Array(3, 7, 5), PackedInt32Array(5, 7, 6), PackedInt32Array(8, 6, 7), PackedInt32Array(8, 7, 9), PackedInt32Array(9, 7, 10), PackedInt32Array(10, 7, 11), PackedInt32Array(15, 14, 12), PackedInt32Array(12, 14, 13), PackedInt32Array(19, 18, 16), PackedInt32Array(16, 18, 17), PackedInt32Array(21, 20, 1), PackedInt32Array(1, 20, 0), PackedInt32Array(9, 10, 22), PackedInt32Array(22, 10, 23), PackedInt32Array(25, 24, 26), PackedInt32Array(26, 24, 27), PackedInt32Array(27, 24, 23), PackedInt32Array(24, 22, 23), PackedInt32Array(20, 21, 28), PackedInt32Array(28, 29, 20), PackedInt32Array(20, 29, 31), PackedInt32Array(20, 31, 30), PackedInt32Array(29, 25, 31), PackedInt32Array(31, 25, 26)]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fn2sa"]
 albedo_texture = ExtResource("1_ybdod")
@@ -57,41 +57,10 @@ use_collision = true
 size = Vector3(200, 1, 200)
 material = SubResource("StandardMaterial3D_fn2sa")
 
-[node name="enemy" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47646, 0)
-collision_mask = 3
-
-[node name="enemy2" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4229, 1.47646, 1.97655)
-collision_mask = 3
-
-[node name="enemy3" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4229, 1.47646, 11.1012)
-collision_mask = 3
-
-[node name="enemy4" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4229, 1.47646, -23.8988)
-collision_mask = 3
-
-[node name="enemy5" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.4229, 1.47646, 8.10121)
-collision_mask = 3
-
-[node name="enemy6" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.4229, 1.47646, -17.8988)
-collision_mask = 3
-
-[node name="enemy7" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.4229, 1.47646, -17.8988)
-collision_mask = 3
-
-[node name="enemy8" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.4229, 1.47646, 29.1012)
-collision_mask = 3
-
-[node name="enemy9" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_38prr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5771, 1.47646, 29.1012)
-collision_mask = 3
+[node name="CSGBox3D2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8655, 7.64782, 1)
+use_collision = true
+size = Vector3(22.3599, 14, 21)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
 environment = SubResource("Environment_38prr")
@@ -103,3 +72,6 @@ shadow_enabled = true
 [node name="Player" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_2s55i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9087, 0.504855, 21.8806)
 runningSpeed = 5
+
+[node name="enemy" parent="." instance=ExtResource("3_38prr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2316, 1.5, -11.9476)

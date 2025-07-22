@@ -30,7 +30,7 @@ var bob_speed := 8.0
 var default_cam_position := Vector3.ZERO
 
 #Float vars
-@onready var weapon_positions: Node3D = $WeaponManager/WeaponPositions
+@onready var weapon_positions: Node3D = %WeaponPositions
 
 var float_amplitude := 0.25 
 var float_speed := 2.0        
@@ -41,6 +41,7 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	default_cam_position = cam_holder.position
 	original_position = weapon_positions.global_position
+
 	
 func _unhandled_input(event: InputEvent) -> void:
 	camera_movement(event)
@@ -55,6 +56,7 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	
 
 
 	# Handle jump.
