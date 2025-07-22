@@ -5,7 +5,8 @@ class_name BaseWeaponScript
 @export var weaponName: String
 @export var weaponMaxCharge: int
 @export var weaponChargeRate: int
-@export var weaponDamage: int
+@export var weaponMaxDamage: int
+@export var weaponMinDamage: int
 @export var chargeWaitTime: float
 @export var weaponRaycast: RayCast3D
 @export var chargeTimer: Timer 
@@ -22,8 +23,6 @@ var currentCharge = 0
 var vfx:Dictionary = {
 	"enemy_damage":
 		"res://scenes/particles/enemy_damage_vfx.tscn",
-	"enemy_impact":
-		"res://scenes/particles/enemy_impact_vfx.tscn",
 		
 }
 
@@ -48,10 +47,9 @@ func shoot():
 				if !animationPlayer.is_playing():
 					animationPlayer.play(shootAnimation)
 					if collider.has_method("damage"):
-						collider.damage(weaponDamage)
+						collider.damage(randi_range(weaponMinDamage, weaponMaxDamage))
 						currentCharge += weaponChargeRate
 						_create_vfx("enemy_damage")
-						_create_vfx("enemy_impact")
 					
 					
 func _create_vfx(vfx_name):

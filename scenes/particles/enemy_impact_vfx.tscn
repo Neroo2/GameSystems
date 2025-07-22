@@ -139,7 +139,6 @@ size = Vector2(3, 3)
 emitting = false
 amount = 1
 lifetime = 0.2
-one_shot = true
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_hekdk")
 draw_pass_1 = SubResource("QuadMesh_cbbxf")
