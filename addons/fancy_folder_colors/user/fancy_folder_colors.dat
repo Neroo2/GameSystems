@@ -4,6 +4,7 @@ PTH={
 "res://addons/": Color(0, 0.6, 0.8, 1),
 "res://assets/": Color(0.828125, 1, 0, 1),
 "res://palettes/": Color(0.265698, 0.0590076, 0.289063, 1),
+"res://resources/": Color(0, 0, 0.470588, 1),
 "res://scenes/": Color(1, 0.304688, 0, 1),
 "res://scripts/": Color(0, 1, 0.789063, 1),
 "res://shaders/": Color(0, 1, 0.0625, 1),

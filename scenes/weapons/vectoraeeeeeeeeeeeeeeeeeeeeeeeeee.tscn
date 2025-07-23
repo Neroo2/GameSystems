@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b7splcd6od8yc"]
+[gd_scene load_steps=31 format=3 uid="uid://mn33fgiqdpkk"]
 
 [ext_resource type="PackedScene" uid="uid://c4rtx76nxvoor" path="res://assets/models/weapons/vectoraeeeeeeeeeeeeeeeeeeeeeeeeee.blend" id="1_5734v"]
 [ext_resource type="Script" uid="uid://bloxieidhw6of" path="res://scripts/weapons/vectoraeeeeeeeeeeeeeeeeeeeeeeeeee.gd" id="2_asdcb"]

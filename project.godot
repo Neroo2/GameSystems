@@ -22,7 +22,7 @@ config/icon="res://icon.svg"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/fancy_folder_colors/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
+enabled=PackedStringArray("res://addons/fancy_folder_colors/plugin.cfg", "res://addons/flickering_light/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
 
 [global_group]
 

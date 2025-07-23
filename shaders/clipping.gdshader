@@ -38,7 +38,7 @@ void vertex() {
 
 	UV = UV * uv1_scale.xy + uv1_offset.xy;
 
-	
+
 
 	/* begin shader magic*/
 
@@ -80,7 +80,7 @@ void fragment() {
 
 	NORMAL_MAP = texture(texture_normal,base_uv).rgb;
 
-	
+
 
 	NORMAL_MAP_DEPTH = normal_scale;
 
