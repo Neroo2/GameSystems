@@ -44,7 +44,8 @@ cull_mode = 2
 albedo_color = Color(0.854663, 0.352294, 0.321411, 1)
 albedo_texture = ExtResource("1_00jo1")
 emission_enabled = true
-emission_energy_multiplier = 2.3
+emission = Color(0.707125, 0.02143, 0.0932678, 1)
+emission_energy_multiplier = 12.92
 
 [sub_resource type="QuadMesh" id="QuadMesh_e8xr0"]
 material = SubResource("StandardMaterial3D_yeoi3")

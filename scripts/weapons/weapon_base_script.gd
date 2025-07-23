@@ -14,7 +14,7 @@ class_name BaseWeaponScript
 var canShoot: bool  = true
 var currentCharge = 0
 var wallCheck: Area3D
-
+var currentDamage: int
 
 @export_category("Weapon Animation")
 @export var animationPlayer: AnimationPlayer
@@ -52,7 +52,8 @@ func shoot():
 					sound_manager.play_audio(shoot_sound, 0.9, 1.2)
 					animationPlayer.play(shootAnimation)
 					if collider.has_method("damage"):
-						collider.damage(randi_range(weaponMinDamage, weaponMaxDamage))
+						currentDamage = randi_range(weaponMinDamage, weaponMaxDamage)
+						collider.damage(currentDamage)
 						currentCharge += weaponChargeRate
 						_create_vfx("enemy_damage")
 
