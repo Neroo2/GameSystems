@@ -8,6 +8,8 @@ extends Node3D
 
 var target_enemy = null
 
+func _ready() -> void:
+	pass
 
 func _physics_process(delta: float) -> void:
 	var enemies_in_area = get_enemies_in_area()

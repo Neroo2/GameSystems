@@ -62,6 +62,7 @@ material = SubResource("StandardMaterial3D_fn2sa")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8655, 7.64782, 1)
+operation = 1
 use_collision = true
 size = Vector3(22.3599, 14, 21)
 
