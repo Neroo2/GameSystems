@@ -236,20 +236,6 @@ tracks/2/keys = {
 "update": 1,
 "values": [false, true]
 }
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../SoundManager")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.0666667),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["vector_shoot", 0.9, 1.5],
-"method": &"play_audio"
-}]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rw3ma"]
 _data = {
@@ -307,7 +293,7 @@ material = SubResource("StandardMaterial3D_yeoi3")
 size = Vector2(4, 4)
 orientation = 1
 
-[node name="vectoraeeeeeeeeeeeeeeeeeeeeeeeeee" node_paths=PackedStringArray("weaponRaycast", "chargeTimer", "animationPlayer") instance=ExtResource("1_5734v")]
+[node name="vectoraeeeeeeeeeeeeeeeeeeeeeeeeee" node_paths=PackedStringArray("weaponRaycast", "chargeTimer", "animationPlayer", "sound_manager") instance=ExtResource("1_5734v")]
 transform = Transform3D(0.00429334, 0, -0.299969, 0, 0.3, 0, 0.299969, 0, 0.00429334, 0, 0, 0)
 script = ExtResource("2_asdcb")
 weaponName = "Vector"
@@ -320,6 +306,8 @@ weaponRaycast = NodePath("WeaponRaycast")
 chargeTimer = NodePath("Timer")
 animationPlayer = NodePath("Main/AnimationPlayer")
 shootAnimation = "vector_shoot"
+sound_manager = NodePath("SoundManager")
+shoot_sound = "vector_shoot"
 
 [node name="Main" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.379828, 0, 0)
@@ -383,10 +371,14 @@ target_position = Vector3(-60, 0, 0)
 collision_mask = 3
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="SoundManager" type="Node" parent="." index="3"]
-script = ExtResource("6_s6gdx")
-metadata/_custom_type_script = "uid://bgtopidm48wh7"
-
-[node name="Timer" type="Timer" parent="." index="4"]
+[node name="Timer" type="Timer" parent="." index="3"]
 wait_time = 5.0
 one_shot = true
+
+[node name="SoundManager" type="Node" parent="." index="4"]
+script = ExtResource("6_s6gdx")
+audios = {
+"steam_audio": "res://sounds/weapons/steam_audio.wav",
+"vector_shoot": "res://sounds/weapons/vector2.wav"
+}
+metadata/_custom_type_script = "uid://bgtopidm48wh7"

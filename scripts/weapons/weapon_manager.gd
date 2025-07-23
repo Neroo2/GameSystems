@@ -3,7 +3,7 @@ extends Node3D
 @export var weaponPoints: Node3D
 @export var detectionArea: Area3D
 
-@export var weapon: Weapon
+@export var weaponToAdd: Weapon
 
 
 var target_enemy = null

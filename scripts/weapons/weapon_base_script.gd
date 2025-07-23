@@ -21,6 +21,10 @@ var wallCheck: Area3D
 @export var shootAnimation: String
 
 
+@export_category("Weapon Sounds")
+@export var sound_manager: SoundManager 
+@export var shoot_sound: String
+
 var vfx:Dictionary = {
 	"enemy_damage":
 		"res://scenes/particles/enemy_damage_vfx.tscn",
@@ -45,6 +49,7 @@ func shoot():
 		if !collider == null:
 			if collider.is_in_group("Enemy"):
 				if !animationPlayer.is_playing():
+					sound_manager.play_audio(shoot_sound, 0.9, 1.2)
 					animationPlayer.play(shootAnimation)
 					if collider.has_method("damage"):
 						collider.damage(randi_range(weaponMinDamage, weaponMaxDamage))
@@ -55,6 +60,9 @@ func shoot():
 func _create_vfx(vfx_name):
 	if !vfx.has(vfx_name):
 		return
+		
+
+		
 		
 	var timer: Timer =  Timer.new()
 		
@@ -93,6 +101,7 @@ func _verify_shoot_conditions():
 
 
 	if currentCharge >= weaponMaxCharge:
+		sound_manager.play_audio("steam_audio", 0.95, 1.1)
 		canShoot = false
 		chargeTimer.start()
 		await chargeTimer.timeout
@@ -105,3 +114,4 @@ func _verify_shoot_conditions():
 		else:
 			canShoot = true
 		
+	

@@ -1,10 +1,10 @@
 extends Node
 class_name SoundManager
 
-var audios: Dictionary = {
-	"vector_shoot":
-		"res://sounds/weapons/vector2.wav",
-	
+@export var audios: Dictionary = {
+	"steam_audio":
+		"res://sounds/weapons/steam_audio.wav",
+
 }
 
 
