@@ -1,21 +1,42 @@
-@tool
 extends Area3D
 
+@export var enemy_scene: PackedScene
+@export var number_to_spawn: int = 1
+@export var spawn_area: CollisionShape3D
+@export var waves: int
+@export var timer: Timer
+@export var timeBetweenWaves: float
 
-const ENEMY = preload("res://scenes/entities/enemies/enemy.tscn")
-@export var collisionShape : CollisionShape3D
+var waveCount = 0
 
+func _ready() -> void:
+	timer.wait_time = timeBetweenWaves
+	timer.timeout.connect(_on_timer_timeout)
+	timer.start()
 
+func _physics_process(delta: float) -> void:
+	print(timer.time_left)
+	if waveCount >= waves:
+		timer.stop()
 
-func spawn_enemy():
+func spawn_enemies():
+	var shape = spawn_area.shape as BoxShape3D
+	var extents = shape.extents
 
-	var spawn_pos = $".".global_position
-	var enemy_instance = ENEMY.instantiate()
+	for i in number_to_spawn:
+		var random_offset = Vector3(
+			randf_range(-extents.x, extents.x),
+			randf_range(1, 1),
+			randf_range(-extents.z, extents.z)
+		)
 
-	get_tree().current_scene.add_child(enemy_instance)
-	enemy_instance.global_position = spawn_pos
+		var spawn_position = global_transform.origin + random_offset
 
+		var enemy = enemy_scene.instantiate()
+		get_tree().current_scene.add_child(enemy)
+		enemy.global_transform.origin = spawn_position
 
 
 func _on_timer_timeout() -> void:
-	spawn_enemy()
+	waveCount += 1
+	spawn_enemies()
