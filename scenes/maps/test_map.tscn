@@ -1,9 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dah030pwppfad"]
+[gd_scene load_steps=12 format=3 uid="uid://dah030pwppfad"]
 
 [ext_resource type="Shader" uid="uid://biym8e30vdw1c" path="res://shaders/ps1.gdshader" id="1_o3n0h"]
 [ext_resource type="Texture2D" uid="uid://cb81ylt7h1573" path="res://textures/test/Test_1m x 1m.png" id="1_ybdod"]
 [ext_resource type="PackedScene" uid="uid://dy35svutguhlm" path="res://scenes/player/player.tscn" id="2_2s55i"]
-[ext_resource type="PackedScene" uid="uid://c40rwl2ubayb3" path="res://scenes/entities/enemies/enemy.tscn" id="3_38prr"]
+[ext_resource type="Script" uid="uid://crcarq7f3fiug" path="res://scripts/entities/enemies/enemy_spawner.gd" id="5_a3b3n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_38prr"]
 shader = ExtResource("1_o3n0h")
@@ -36,6 +36,9 @@ glow_enabled = true
 glow_strength = 1.15
 adjustment_enabled = true
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_qoqmi"]
+size = Vector3(43.8053, 1, 45.5182)
+
 [node name="TestMap" type="Node3D"]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
@@ -61,10 +64,10 @@ size = Vector3(200, 1, 200)
 material = SubResource("StandardMaterial3D_fn2sa")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8655, 7.64782, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.4264, 9.67471, 1)
 operation = 1
 use_collision = true
-size = Vector3(22.3599, 14, 21)
+size = Vector3(114.944, 14, 21)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
 environment = SubResource("Environment_38prr")
@@ -77,10 +80,16 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9087, 0.504855, 21.8806)
 runningSpeed = 5
 
-[node name="enemy" parent="." instance=ExtResource("3_38prr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.11138, 1.5, 19.5355)
-collision_mask = 3
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56963, 0)
+script = ExtResource("5_a3b3n")
 
-[node name="enemy2" parent="." instance=ExtResource("3_38prr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.9136, 1.5, 29.3837)
-collision_mask = 3
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2878, 0, 22.2591)
+shape = SubResource("BoxShape3D_qoqmi")
+
+[node name="Timer" type="Timer" parent="Area3D"]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Area3D/Timer" to="Area3D" method="_on_timer_timeout"]
