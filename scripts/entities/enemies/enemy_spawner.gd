@@ -7,6 +7,8 @@ extends Area3D
 @export var timer: Timer
 @export var timeBetweenWaves: float
 
+
+
 var waveCount = 0
 
 func _ready() -> void:
@@ -15,7 +17,6 @@ func _ready() -> void:
 	timer.start()
 
 func _physics_process(delta: float) -> void:
-	print(timer.time_left)
 	if waveCount >= waves:
 		timer.stop()
 

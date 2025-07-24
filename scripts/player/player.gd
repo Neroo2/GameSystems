@@ -14,6 +14,13 @@ const JUMP_VELOCITY = 4.5
 var current_speed: int = 2
 
 
+@export_category("PlayerStatus")
+@export var playerHealth: int
+@export var playerLevel: int
+var playerExperience: float = 0
+var currentLevel: int = 1
+var expToLevelUp: float
+
 #Character Nodes
 @onready var player_model: Node3D = $playerModel
 @onready var armature: Node3D = $playerModel/Armature
@@ -119,6 +126,19 @@ func camera_movement(event):
 		cam_holder.rotate_x(deg_to_rad(-event.relative.y * 0.05))
 		cam_holder.rotation.x = clamp(cam_holder.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
+
+func apply_experience(exp: float):
+	playerExperience += exp
+	_verify_experience()
+
+func _verify_experience():
+	expToLevelUp = 100 * playerLevel
+	
+	if playerExperience >= expToLevelUp:
+		playerExperience  = 0
+		playerLevel += 1
+		if playerLevel % 3 == 0 :
+			pass
 
 #On enter states
 func _on_idle_state_state_entered() -> void:

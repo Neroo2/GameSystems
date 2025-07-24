@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c40rwl2ubayb3"]
+[gd_scene load_steps=6 format=3 uid="uid://c40rwl2ubayb3"]
 
 [ext_resource type="Script" uid="uid://cupw46a8y42ix" path="res://scripts/entities/enemies/enemy.gd" id="1_yfmsl"]
 
@@ -8,16 +8,27 @@ albedo_color = Color(1, 0, 0, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_yfmsl"]
 material = SubResource("StandardMaterial3D_ir4ge")
 
+[sub_resource type="BoxMesh" id="BoxMesh_yfmsl"]
+size = Vector3(0.5, 0.5, 0.815)
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yfmsl"]
 
-[node name="enemy" type="CharacterBody3D" node_paths=PackedStringArray("navigationAgent") groups=["Enemy"]]
+[node name="enemy" type="CharacterBody3D" node_paths=PackedStringArray("navigationAgent", "enemyMesh") groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_yfmsl")
 navigationAgent = NodePath("NavigationAgent3D")
+expAmount = 300.0
+enemyMesh = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_yfmsl")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13355e-08, 0.489161, 0.129663)
+mesh = SubResource("BoxMesh_yfmsl")
+skeleton = NodePath("../..")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 

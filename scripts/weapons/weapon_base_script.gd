@@ -92,7 +92,6 @@ func _create_vfx(vfx_name):
 
 
 func _verify_shoot_conditions():
-	var collider = weaponRaycast.get_collider()
 	
 	if currentCharge >= weaponMaxCharge and not chargeTimer.is_stopped():
 		return
