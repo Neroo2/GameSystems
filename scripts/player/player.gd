@@ -9,9 +9,9 @@ const JUMP_VELOCITY = 4.5
 @export var animation_player: AnimationPlayer
 
 @export_category("MovementVars")
-@export var walkingSpeed: int
-@export var runningSpeed: int
-var current_speed: int = 2
+@export var walkingSpeed: float
+@export var runningSpeed: float
+var current_speed: float = 2.0
 
 
 @export_category("PlayerStatus")
@@ -60,10 +60,13 @@ func _process(_delta: float) -> void:
 	weapon_positions.global_position.y = original_position.y + y_offset
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
+	verify_state()
+	
+		# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
+
 
 
 	# Handle jump.
@@ -71,6 +74,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 
 
+	move_and_slide()
 
 func movement_handling(delta):
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
@@ -136,7 +140,6 @@ func _verify_experience():
 	if playerExperience >= expToLevelUp:
 		playerExperience  = 0
 		playerLevel += 1
-
 	
 #On enter states
 func _on_idle_state_state_entered() -> void:
