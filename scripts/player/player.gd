@@ -122,6 +122,7 @@ func verify_state():
 	else:
 		state_machine.send_event("toIdle")
 
+
 func camera_movement(event):
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x * 0.05))
@@ -140,7 +141,10 @@ func _verify_experience():
 	if playerExperience >= expToLevelUp:
 		playerExperience  = 0
 		playerLevel += 1
-	
+		if playerLevel % 2 == 0:
+			runningSpeed += runningSpeed/10
+
+
 #On enter states
 func _on_idle_state_state_entered() -> void:
 	animation_player.play("Idle")
