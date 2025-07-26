@@ -1,6 +1,8 @@
 extends Node
 class_name BaseWeaponScript
 
+
+
 @export_category("Weapon Info")
 @export var weaponName: String
 @export var weaponMaxCharge: int
@@ -31,12 +33,14 @@ var vfx:Dictionary = {
 		
 }
 
+
 func _ready():
 	wallCheck = get_tree().current_scene.find_child("WallCheck")
 	chargeTimer.wait_time = chargeWaitTime
 	chargeTimer.one_shot = true
 
-func _physics_process(delta: float) -> void:
+
+func _physics_process(_delta: float) -> void:
 	_verify_shoot_conditions()
 	if canShoot:
 		shoot()

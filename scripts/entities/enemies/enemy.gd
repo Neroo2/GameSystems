@@ -17,6 +17,8 @@ const JUMP_VELOCITY = 4.5
 func _ready() -> void:
 	player = get_tree().current_scene.find_child("Player")
 
+
+
 func _physics_process(delta: float) -> void:
 	navigationAgent.target_position = player.global_position
 	

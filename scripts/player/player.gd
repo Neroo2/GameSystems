@@ -48,13 +48,13 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	default_cam_position = cam_holder.position
 	original_position = weapon_positions.global_position
-
+	
 	
 func _unhandled_input(event: InputEvent) -> void:
 	camera_movement(event)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var time = Time.get_ticks_msec() / 1000.0
 	var y_offset = sin(time * float_speed) * float_amplitude
 	weapon_positions.global_position.y = original_position.y + y_offset
@@ -71,7 +71,6 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 
 
-	move_and_slide()
 
 func movement_handling(delta):
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
@@ -127,8 +126,8 @@ func camera_movement(event):
 		cam_holder.rotation.x = clamp(cam_holder.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 
-func apply_experience(exp: float):
-	playerExperience += exp
+func apply_experience(experience: float):
+	playerExperience += experience
 	_verify_experience()
 
 func _verify_experience():
@@ -137,9 +136,8 @@ func _verify_experience():
 	if playerExperience >= expToLevelUp:
 		playerExperience  = 0
 		playerLevel += 1
-		if playerLevel % 3 == 0 :
-			pass
 
+	
 #On enter states
 func _on_idle_state_state_entered() -> void:
 	animation_player.play("Idle")

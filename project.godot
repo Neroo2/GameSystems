@@ -20,6 +20,10 @@ run/main_scene="uid://dah030pwppfad"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalSignals="*res://scenes/globals/global_signals.gd"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/UniParticles3D/plugin.cfg", "res://addons/fancy_folder_colors/plugin.cfg", "res://addons/flickering_light/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")

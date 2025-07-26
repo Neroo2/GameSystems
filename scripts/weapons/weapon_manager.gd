@@ -11,7 +11,7 @@ var target_enemy = null
 func _ready() -> void:
 	pass
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var enemies_in_area = get_enemies_in_area()
 	
 	for point in weaponPoints.get_children():
