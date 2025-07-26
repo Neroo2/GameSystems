@@ -21,10 +21,6 @@ func _ready() -> void:
 	timer.start()
 	maxEnemies = number_to_spawn * waves
 
-
-func _physics_process(delta: float) -> void:
-	pass
-
 func spawn_enemies():
 	var shape = spawn_area.shape as BoxShape3D
 	var extents = shape.extents
@@ -54,9 +50,9 @@ func _on_timer_timeout() -> void:
 	if waveCount >= waves:
 		timer.stop()
 
-	if enemiesKilled >= maxEnemies:
-		print("all enemies eliminated")
+	spawn_enemies()
 
 func _on_enemy_death():
 	enemiesKilled += 1
-	
+	if enemiesKilled >= maxEnemies:
+		pass
