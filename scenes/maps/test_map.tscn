@@ -86,6 +86,7 @@ spawn_area = NodePath("CollisionShape3D")
 waves = 3
 timer = NodePath("Timer")
 timeBetweenWaves = 10.0
+enemiesScenes = [ExtResource("3_38prr")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.27254, 0)

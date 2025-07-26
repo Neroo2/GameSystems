@@ -6,8 +6,12 @@ extends Area3D
 @export var waves: int
 @export var timer: Timer
 @export var timeBetweenWaves: float
+@export var enemiesScenes: Array[PackedScene]
+var enemyCount: int
+var maxEnemies: int
+var enemiesKilled: int
 
-
+var enemiesSpawned = []
 
 var waveCount = 0
 
@@ -15,14 +19,17 @@ func _ready() -> void:
 	timer.wait_time = timeBetweenWaves
 	timer.timeout.connect(_on_timer_timeout)
 	timer.start()
+	maxEnemies = number_to_spawn * waves
+
 
 func _physics_process(delta: float) -> void:
-	if waveCount >= waves:
-		timer.stop()
+	pass
 
 func spawn_enemies():
 	var shape = spawn_area.shape as BoxShape3D
 	var extents = shape.extents
+	enemyCount += number_to_spawn
+	print(enemyCount)
 
 	for i in number_to_spawn:
 		var random_offset = Vector3(
@@ -33,11 +40,23 @@ func spawn_enemies():
 
 		var spawn_position = global_transform.origin + random_offset
 
-		var enemy = enemy_scene.instantiate()
-		get_tree().current_scene.add_child(enemy)
-		enemy.global_transform.origin = spawn_position
+		for j in enemiesScenes.size():
+			var enemy = enemiesScenes[j].instantiate()
+			get_tree().current_scene.add_child(enemy)
+			enemiesSpawned.append(enemy)
+			enemy.connect("enemyDeath", _on_enemy_death)
+			enemy.global_transform.origin = spawn_position
 
 
 func _on_timer_timeout() -> void:
 	waveCount += 1
-	spawn_enemies()
+
+	if waveCount >= waves:
+		timer.stop()
+
+	if enemiesKilled >= maxEnemies:
+		print("all enemies eliminated")
+
+func _on_enemy_death():
+	enemiesKilled += 1
+	

@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+signal enemyDeath
+
 
 @export var navigationAgent: NavigationAgent3D
 @export var expAmount: float
@@ -39,3 +41,4 @@ func damage(dmg):
 	if health <= 0:
 		queue_free()
 		player.apply_experience(expAmount)
+		enemyDeath.emit()
