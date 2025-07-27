@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5n1jjyky778w"]
+
+[ext_resource type="Texture2D" uid="uid://ddfp5t35hebtr" path="res://assets/icons/paper-sheet-svgrepo-com (1).svg" id="1_37dfq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37dfq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.756863)
+
+[node name="InventorySlot" type="PanelContainer"]
+scale = Vector2(0.998036, 0.988631)
+theme_override_styles/panel = SubResource("StyleBoxFlat_37dfq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_37dfq")

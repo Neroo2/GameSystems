@@ -1,6 +1,6 @@
 extends Area3D
 
-@export var enemy_scene: PackedScene
+
 @export var number_to_spawn: int = 1
 @export var spawn_area: CollisionShape3D
 @export var waves: int
@@ -25,7 +25,6 @@ func spawn_enemies():
 	var shape = spawn_area.shape as BoxShape3D
 	var extents = shape.extents
 	enemyCount += number_to_spawn
-	print(enemyCount)
 
 	for i in number_to_spawn:
 		var random_offset = Vector3(

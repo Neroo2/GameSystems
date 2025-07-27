@@ -78,20 +78,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9087, 0.504855, 21.8806)
 walkingSpeed = 2.0
 runningSpeed = 6.0
 
-[node name="Area3D" type="Area3D" parent="." node_paths=PackedStringArray("spawn_area", "timer")]
+[node name="EnemySpawner" type="Area3D" parent="." node_paths=PackedStringArray("spawn_area", "timer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.39989, -4.76837e-07, -94.0176)
 script = ExtResource("5_a3b3n")
-enemy_scene = ExtResource("3_38prr")
-number_to_spawn = 3
 spawn_area = NodePath("CollisionShape3D")
-waves = 1
+waves = 2
 timer = NodePath("Timer")
 timeBetweenWaves = 10.0
 enemiesScenes = Array[PackedScene]([ExtResource("3_38prr")])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemySpawner"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.27254, 0)
 shape = SubResource("BoxShape3D_38prr")
 
-[node name="Timer" type="Timer" parent="Area3D"]
+[node name="Timer" type="Timer" parent="EnemySpawner"]
 wait_time = 2.0
